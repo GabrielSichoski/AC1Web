@@ -68,6 +68,11 @@ public class Aluno {
                 ", numeroCel='" + numeroCel + '\'' +
                 '}';
     }
+
+    public Aluno orElse(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
+    }
 }
 
 
