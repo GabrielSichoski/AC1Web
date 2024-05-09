@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import arquiteturawebAC1.AC1.Model.Aluno;
-import arquiteturawebAC1.AC1.Repository.AlunoRepository;
+
 import arquiteturawebAC1.AC1.Service.AlunoService;
 
 import java.util.List;
@@ -16,11 +16,9 @@ import java.util.Optional;
 @RequestMapping("/api/alunos")
 public class AlunoController {
 
+    
     @Autowired
     private AlunoService alunoService;
-
-    @Autowired
-    private AlunoRepository alunoRepository;
 
     @GetMapping("/")
     public ResponseEntity<List<Aluno>> listarTodosAlunos() {
@@ -36,42 +34,26 @@ public class AlunoController {
 
     @GetMapping("/nome/{nome}")
     public ResponseEntity<List<Aluno>> buscarAlunosPorNome(@PathVariable String nome) {
-        List<Aluno> alunos = alunoRepository.findByNomeContainingIgnoreCase(nome);
-        if (!alunos.isEmpty()) {
-            return ResponseEntity.ok().body(alunos);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        List<Aluno> alunos = alunoService.buscarPorNome(nome);
+        return ResponseEntity.ok().body(alunos);
     }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<List<Aluno>> buscarAlunosPorEmail(@PathVariable String email) {
-        List<Aluno> alunos = alunoRepository.findByEmail(email);
-        if (!alunos.isEmpty()) {
-            return ResponseEntity.ok().body(alunos);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        List<Aluno> alunos = alunoService.buscarPorEmail(email);
+        return ResponseEntity.ok().body(alunos);
     }
 
     @GetMapping("/NumeroCel/{NumeroCel}")
     public ResponseEntity<List<Aluno>> buscarAlunosPorNumeroCel(@PathVariable String NumeroCel) {
-        List<Aluno> alunos = alunoRepository.findByNumeroCel(NumeroCel);
-        if (!alunos.isEmpty()) {
-            return ResponseEntity.ok().body(alunos);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        List<Aluno> alunos = alunoService.buscarPorNumeroCel(NumeroCel);
+        return ResponseEntity.ok().body(alunos);
     }
 
     @GetMapping("/ra/{ra}")
     public ResponseEntity<List<Aluno>> buscarAlunosPorRA(@PathVariable String ra) {
-        List<Aluno> alunos = alunoRepository.findByRA(ra);
-        if (!alunos.isEmpty()) {
-            return ResponseEntity.ok().body(alunos);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        List<Aluno> alunos = alunoService.buscarPorRA(ra);
+        return ResponseEntity.ok().body(alunos);
     }
 
     @PostMapping("/")
